@@ -1,1 +1,1 @@
-# OpenGL_Window
+# OpenGL-Model-Viewer
