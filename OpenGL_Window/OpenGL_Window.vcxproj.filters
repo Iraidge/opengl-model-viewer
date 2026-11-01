@@ -18,7 +18,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Users\deroh\Downloads\glad\src\glad.c">
+    <ClCompile Include="glad.c">
       <Filter>Header Files</Filter>
     </ClCompile>
   </ItemGroup>
