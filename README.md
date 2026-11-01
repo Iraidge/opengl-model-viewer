@@ -4,6 +4,8 @@ A 3D model viewer built with C++ and OpenGL. The goal is to load an OBJ model, r
 
 > **Status: work in progress.** Currently an OpenGL window is created with GLFW and GLAD. Rendering and model loading are being added step by step.
 
+https://github.com/user-attachments/assets/887c9f45-e2af-4a72-8045-02557d29796a
+
 ## Planned features
 
 - [x] Window and OpenGL 3.3 Core context (GLFW + GLAD)
