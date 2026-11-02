@@ -4,12 +4,12 @@ A 3D model viewer built with C++ and OpenGL. The goal is to load an OBJ model, r
 
 > **Status: work in progress.** Currently an OpenGL window is created with GLFW and GLAD. Rendering and model loading are being added step by step.
 
-https://github.com/user-attachments/assets/887c9f45-e2af-4a72-8045-02557d29796a
+<img width="800" height="633" alt="Viewer" src="https://github.com/user-attachments/assets/9d01aab4-b135-4e1f-a6cd-23bf5398dacf" />
 
 ## Planned features
 
 - [x] Window and OpenGL 3.3 Core context (GLFW + GLAD)
-- [ ] Hello Triangle (VBO, VAO, shaders)
+- [x] Hello Triangle (VBO, VAO, shaders)
 - [ ] Transformations and camera (model / view / projection)
 - [ ] OBJ loading (vertices, faces, normals)
 - [ ] Render modes: points, wireframe, solid
