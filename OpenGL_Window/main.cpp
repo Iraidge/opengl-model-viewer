@@ -41,11 +41,13 @@ int main() {
 		return -1;
 	}
 
-	float vertices[] = {
-	   -0.9f, -0.5f, 0.0f,
+	float triangle1[] = {
+		-0.9f, -0.5f, 0.0f,
 	   -0.1f, -0.5f, 0.0f,
-	   -0.5f,  0.5f, 0.0f,
+	   -0.5f,  0.5f, 0.0f
+	};
 
+	float triangle2[] = {
 	    0.1f,-0.5f, 0.0f,
 	    0.9f,-0.5f, 0.0f,
 		0.5f, 0.5f, 0.0f
@@ -56,17 +58,33 @@ int main() {
 		4, 5, 6
 	};*/
 
-	unsigned int VAO, VBO, EBO;
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
+	unsigned int VAO1, VBO1, VAO2, VBO2;
+	
+	glGenVertexArrays(1, &VAO1);
+	glBindVertexArray(VAO1);
 
-	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &VBO1);
 	/*glGenBuffers(1, &EBO);*/
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO1);
 	/*glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);*/
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle1), triangle1, GL_STATIC_DRAW);
 	/*glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);*/
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+
+	glGenVertexArrays(1, &VAO2);
+	glBindVertexArray(VAO2);
+
+	glGenBuffers(1, &VBO2);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO2);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle2), triangle2, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
 
 	int success;
 	char infoLog[512];
@@ -112,8 +130,6 @@ int main() {
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
 	/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
 
 	while (!glfwWindowShouldClose(window))
@@ -124,10 +140,13 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO);
+		glBindVertexArray(VAO1);
 		/*glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);*/
 		/*glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);*/
-		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+
+		glBindVertexArray(VAO2);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
