@@ -16,13 +16,6 @@ const char* fragmentShaderSource = "#version 330 core\n"
 "FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
 "}\n";
 
-const char* fragmentShaderSource2 = "#version 330 core\n"
-"out vec4 FragColor;\n"
-"void main()\n"
-"{\n"
-"FragColor = vec4(1.0f, 1.0f, 0.0f, 1.0f);\n"
-"}\n";
-
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void ProcessInput(GLFWwindow* window);
 
@@ -48,38 +41,24 @@ int main() {
 		return -1;
 	}
 
-	float triangle1[] = {
-		-0.9f, -0.5f, 0.0f,
-	   -0.1f, -0.5f, 0.0f,
-	   -0.5f,  0.5f, 0.0f
+	float vertices[] = {
+		-0.5f, -0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
+		0.0f,  0.5f, 0.0f
 	};
 
-	float triangle2[] = {
-	    0.1f,-0.5f, 0.0f,
-	    0.9f,-0.5f, 0.0f,
-		0.5f, 0.5f, 0.0f
-	};
-
-	unsigned int VAO1, VBO1, VAO2, VBO2;
+	unsigned int VAO, VBO;
 	
-	glGenVertexArrays(1, &VAO1);
-	glBindVertexArray(VAO1);
+	glGenVertexArrays(1, &VAO);
+	glBindVertexArray(VAO);
 
-	glGenBuffers(1, &VBO1);
+	glGenBuffers(1, &VBO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO1);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle1), triangle1, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
-
-
-	glGenVertexArrays(1, &VAO2);
-	glBindVertexArray(VAO2);
-
-	glGenBuffers(1, &VBO2);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO2);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(triangle2), triangle2, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -100,14 +79,10 @@ int main() {
 		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
 
-	unsigned int fragmentShader, fragmentShader2;
+	unsigned int fragmentShader;
 	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
 	glCompileShader(fragmentShader);
-
-	fragmentShader2 = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader2, 1, &fragmentShaderSource2, NULL);
-	glCompileShader(fragmentShader2);
 
 	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
 
@@ -116,18 +91,12 @@ int main() {
 		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
 
-	glGetShaderiv(fragmentShader2, GL_COMPILE_STATUS, &success);
-
-	if (!success) {
-		glGetShaderInfoLog(fragmentShader2, 512, NULL, infoLog);
-		std::cout << "ERROR::SHADER::FRAGMENT2::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-
-	unsigned int shaderProgram, shaderProgram2;
+	unsigned int shaderProgram;
 	shaderProgram = glCreateProgram();
 
 	glAttachShader(shaderProgram, vertexShader);
 	glAttachShader(shaderProgram, fragmentShader);
+
 	glLinkProgram(shaderProgram);
 
 	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
@@ -137,24 +106,10 @@ int main() {
 		std::cout << "ERROR::PROGRAM::LINK::COMPILATION_FAILED\n" << infoLog << std::endl;
 	}
 
-	shaderProgram2 = glCreateProgram();
-
-	glAttachShader(shaderProgram2, vertexShader);
-	glAttachShader(shaderProgram2, fragmentShader2);
-	glLinkProgram(shaderProgram2);
-
-	glGetProgramiv(shaderProgram2, GL_LINK_STATUS, &success);
-
-	if (!success) {
-		glGetProgramInfoLog(shaderProgram2, 512, NULL, infoLog);
-		std::cout << "ERROR::PROGRAM2::LINK::COMPILATION_FAILED\n" << infoLog << std::endl;
-	}
-
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
-	glDeleteShader(fragmentShader2);
 
-	/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -164,13 +119,9 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		glUseProgram(shaderProgram);
-		glBindVertexArray(VAO1);
+		glBindVertexArray(VAO);
 		/*glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);*/
 		/*glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);*/
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-
-		glUseProgram(shaderProgram2);
-		glBindVertexArray(VAO2);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		glfwSwapBuffers(window);
