@@ -1,0 +1,6 @@
+# ninja log v7
+2	737	1794577853362294976	CMakeFiles/viewer.dir/third_party/glad/src/glad.c.o	e20f0a25acacd655
+2	822	1794577853361294982	CMakeFiles/viewer.dir/OpenGL_Window/main.cpp.o	33ba36fdc6f06510
+823	950	1794577854182289960	viewer	3302b6d09716ccd1
+3	1033	1794582252236016780	CMakeFiles/viewer.dir/OpenGL_Window/main.cpp.o	33ba36fdc6f06510
+1034	1201	1794582253267012364	viewer	3302b6d09716ccd1

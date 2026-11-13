@@ -1,0 +1,14 @@
+[
+{
+  "directory": "/home/iraidge/projects/opengl-model-viewer/build",
+  "command": "/usr/lib64/ccache/c++ -I/home/iraidge/projects/opengl-model-viewer/third_party/glad/include -std=gnu++20 -o CMakeFiles/viewer.dir/OpenGL_Window/main.cpp.o -c /home/iraidge/projects/opengl-model-viewer/OpenGL_Window/main.cpp",
+  "file": "/home/iraidge/projects/opengl-model-viewer/OpenGL_Window/main.cpp",
+  "output": "/home/iraidge/projects/opengl-model-viewer/build/CMakeFiles/viewer.dir/OpenGL_Window/main.cpp.o"
+},
+{
+  "directory": "/home/iraidge/projects/opengl-model-viewer/build",
+  "command": "/usr/lib64/ccache/cc -I/home/iraidge/projects/opengl-model-viewer/third_party/glad/include -o CMakeFiles/viewer.dir/third_party/glad/src/glad.c.o -c /home/iraidge/projects/opengl-model-viewer/third_party/glad/src/glad.c",
+  "file": "/home/iraidge/projects/opengl-model-viewer/third_party/glad/src/glad.c",
+  "output": "/home/iraidge/projects/opengl-model-viewer/build/CMakeFiles/viewer.dir/third_party/glad/src/glad.c.o"
+}
+]
